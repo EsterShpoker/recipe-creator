@@ -14,6 +14,7 @@ from core.models import Recipe
 
 from recipe.serializers import RecipeSerializer
 
+
 RECIPES_URL = reverse('recipe:recipe-list')
 
 
@@ -24,7 +25,7 @@ def create_recipe(user, **params):
         'time_minutes': 22,
         'price': Decimal('5.25'),
         'description': 'Sample description',
-        'link': 'http://example.com/recipe.pdf'
+        'link': 'http://example.com/recipe.pdf',
     }
     defaults.update(params)
 
@@ -36,7 +37,7 @@ class PublicRecipeAPITests(TestCase):
     """Test unauthenticated API requests."""
 
     def setUp(self):
-        self.client = APIClient
+        self.client = APIClient()
 
     def test_auth_required(self):
         """Test auth is required to call API."""
@@ -46,17 +47,17 @@ class PublicRecipeAPITests(TestCase):
 
 
 class PrivateRecipeApiTests(TestCase):
-    """Test authentication API requests."""
+    """Test authenticated API requests."""
 
-    def setUP(self):
+    def setUp(self):
         self.client = APIClient()
         self.user = get_user_model().objects.create_user(
             'user@example.com',
             'testpass123',
         )
-        self.client.force_authenticate(Self.user)
+        self.client.force_authenticate(self.user)
 
-    def test_retrive_recipes(self):
+    def test_retrieve_recipes(self):
         """Test retrieving a list of recipes."""
         create_recipe(user=self.user)
         create_recipe(user=self.user)
@@ -83,4 +84,3 @@ class PrivateRecipeApiTests(TestCase):
         serializer = RecipeSerializer(recipes, many=True)
         self.assertEqual(res.status_code, status.HTTP_200_OK)
         self.assertEqual(res.data, serializer.data)
-
