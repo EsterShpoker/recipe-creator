@@ -19,5 +19,4 @@ app_name = 'recipe'
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('api/recipe/', include('recipe.urls')),
 ]
