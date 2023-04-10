@@ -43,7 +43,7 @@ class RecipeSerializer(serializers.ModelSerializer):
         return recipe
 
 
-class RecipeDetailSerializer(serializers.ModelSerializer):
+class RecipeDetailSerializer(RecipeSerializer):
     """Serializer for recipe detail view."""
 
     class Meta(RecipeSerializer.Meta):
