@@ -241,4 +241,4 @@ class PrivateRecipeApiTests(TestCase):
                 name=tag['name'],
                 user=self.user,
             ).exists()
-            self.assertTrue(exists)
+            self.assertTrue(exists
