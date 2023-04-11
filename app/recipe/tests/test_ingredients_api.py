@@ -17,7 +17,7 @@ INGREDIENTS_URL = reverse('recipe:ingredient-list')
 
 
 def detail_url(ingredient_id):
-    """Create and return an igredient detail URL."""
+    """Create and return an ingredient detail URL."""
     return reverse('recipe:ingredient-detail', args=[ingredient_id])
 
 
